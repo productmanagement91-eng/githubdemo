@@ -147,6 +147,28 @@ svg { display: block; }
 
 .topbar { display: none; }
 
+.made-by {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: -8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.made-by::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.made-by strong { color: var(--accent); font-weight: 600; }
+
 .card, .stat-card, .welcome {
   background: var(--surface);
   border: 1px solid var(--border);
