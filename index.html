@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Dashboard</title>
+  <meta name="description" content="TaskFlow: a modern productivity dashboard to manage your tasks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span class="brand-name">TaskFlow</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#" class="nav-link active" data-filter="all">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-link" data-filter="active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+          My Tasks
+        </a>
+        <a href="#" class="nav-link" data-filter="completed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+          Completed
+        </a>
+        <a href="#" class="nav-link" data-nav="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Stay focused</p>
+        <p class="sidebar-card-text">Small steps every day add up to big results.</p>
+      </div>
+
+      <div class="user">
+        <div class="avatar" aria-hidden="true">U</div>
+        <div class="user-info">
+          <span class="user-name">You</span>
+          <span class="user-role">Personal workspace</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="backdrop" id="backdrop" hidden></div>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <span class="topbar-brand">TaskFlow</span>
+      </header>
+
+      <!-- Welcome -->
+      <section class="welcome">
+        <div>
+          <p class="welcome-date" id="todayDate"></p>
+          <h1 class="welcome-title"><span id="greeting">Hello</span> 👋</h1>
+          <p class="welcome-text" id="welcomeText">Let's make today productive.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="ring">
+            <svg viewBox="0 0 36 36">
+              <circle class="ring-bg" cx="18" cy="18" r="15.9" />
+              <circle class="ring-fg" id="ringFg" cx="18" cy="18" r="15.9" />
+            </svg>
+            <span class="ring-label" id="ringLabel">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="stats" aria-label="Task statistics">
+        <article class="stat-card">
+          <div class="stat-icon icon-total">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+          </div>
+          <div>
+            <p class="stat-label">Total Tasks</p>
+            <p class="stat-value" id="statTotal">0</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-done">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+          </div>
+          <div>
+            <p class="stat-label">Completed</p>
+            <p class="stat-value" id="statDone">0</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-pending">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div>
+            <p class="stat-label">Pending</p>
+            <p class="stat-value" id="statPending">0</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-rate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+          </div>
+          <div class="stat-grow">
+            <p class="stat-label">Progress</p>
+            <p class="stat-value" id="statRate">0%</p>
+            <div class="progress" role="progressbar" aria-label="Completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Tasks -->
+      <section class="card tasks" aria-labelledby="tasksTitle">
+        <div class="tasks-header">
+          <h2 id="tasksTitle">My Tasks</h2>
+          <div class="filters" role="tablist" aria-label="Filter tasks">
+            <button class="filter active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter" data-filter="active" role="tab" aria-selected="false">Active</button>
+            <button class="filter" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+          </div>
+        </div>
+
+        <form class="add-form" id="addForm" autocomplete="off">
+          <input type="text" id="taskInput" class="input" placeholder="What needs to be done?" maxlength="140" aria-label="New task" required />
+          <select id="prioritySelect" class="select" aria-label="Priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button type="submit" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add Task
+          </button>
+        </form>
+
+        <ul class="task-list" id="taskList" aria-live="polite"></ul>
+
+        <div class="empty" id="emptyState" hidden>
+          <div class="empty-icon" aria-hidden="true">✨</div>
+          <p class="empty-title" id="emptyTitle">No tasks yet</p>
+          <p class="empty-text" id="emptyText">Add your first task above to get started.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
